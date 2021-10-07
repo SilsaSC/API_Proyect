@@ -8,17 +8,16 @@ const app = express();
 
 //Configuración del Cords
 app.use(cors());
+//Lectura y parseo del body
+app.use(express.json());
 
 //Estableciendo conexion a la base de datos
 dbConection();
-console.log(process.env);
-// Ruta de la API
-app.get('/', (req, res) => {
-    res.status(400).json({
-        ok: true,
-        msg: 'Bienvenidos a node'
-    });
-});
+//console.log(process.env);
+
+//Rutas de la API
+app.use('/api/usuarios', require('./routes/usuarios.route'));
+app.use('/api/login', require('./routes/auth.route'));
 
 //Para levantar el servidor
 //app.listen(3000, () => {
